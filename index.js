@@ -24,7 +24,9 @@ const {
 
 const bot = getBotInstance();
 
-bot.setWebHook(`${url}/bot${process.env.BOT_TOKEN}`);
+bot.setWebHook(
+  `https://api.telegram.org/bot${process.env.BOT_TOKEN}/?url=${url}`
+);
 
 server.get("/", (req, res) => {
   res.status(200).json({ message: "end point working fine bro" });
