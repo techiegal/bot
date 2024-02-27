@@ -23,15 +23,14 @@ const {
 } = require("./controllers/commandHandlers");
 
 const bot = getBotInstance();
-
+bot.setWebHook(`${url}/bot${process.env.BOT_TOKEN}`);
 server.get("/", (req, res) => {
   res.status(200).json({ message: "end point working fine bro" });
 });
 
-server.post(`/${process.env.BOT_TOKEN}`, (req, res) => {
-  console.log(req.body);
+server.post(`/bot${process.env.BOT_TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
-  res.status(200).json({ message: "ok" });
+  res.sendStatus(200);
 });
 
 server.listen(port, () => {
