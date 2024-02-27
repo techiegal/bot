@@ -29,12 +29,13 @@ server.get("/", (req, res) => {
 });
 
 server.post(`/start`, (req, res) => {
+  console.log(req.body);
   bot.processUpdate(req.body);
   res.status(200).json({ message: "ok" });
 });
 
 server.listen(port, () => {
-  console.log("app up and running ");
+  console.log(`app up and running ${port}`);
 });
 
 bot.on("message", handleMessage);
