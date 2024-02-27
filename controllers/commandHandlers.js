@@ -47,6 +47,8 @@ const Ban = async (msg) => {
 };
 
 const Check = async (msg) => {
+  if (!msg.chat.type === "group" || msg.chat.type === "supergroup")
+    return bot.sendMessage(msg.chat.id, "Command not found");
   const fromUsername = msg.from.username;
   const username = msg.from.first_name;
   const chatId = msg.chat.id;

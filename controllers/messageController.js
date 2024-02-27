@@ -56,8 +56,4 @@ const handleMessage = async (msg) => {
   }
 };
 
-const check = async (msg) => {
-  // bot.sendMessage(msg.chat.id, "hiii");
-};
-
-module.exports = { handleMessage, check };
+module.exports = { handleMessage };

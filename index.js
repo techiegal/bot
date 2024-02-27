@@ -8,11 +8,11 @@ const url = process.env.SITE_URL;
 server.use(express.json());
 //database connection
 require("./db/conn");
-
+//get bot instance
 const { getBotInstance } = require("./configs/botConfig");
 
 //all imports
-const { handleMessage, check } = require("./controllers/messageController");
+const { handleMessage } = require("./controllers/messageController");
 const { pickRandom } = require("./controllers/extraFunctions");
 const {
   Start,
@@ -23,9 +23,9 @@ const {
 } = require("./controllers/commandHandlers");
 
 const bot = getBotInstance();
-bot.setWebHook(`${url}/bot${process.env.BOT_TOKEN}`);
+
 server.get("/", (req, res) => {
-  res.status(200).json({ message: "end point working fine bro" });
+  res.status(200).json({ message: "end point working fine" });
 });
 
 server.post(`/bot${process.env.BOT_TOKEN}`, (req, res) => {
@@ -38,7 +38,6 @@ server.listen(port, () => {
 });
 
 bot.on("message", handleMessage);
-bot.on("message", check);
 bot.onText(/\/pick/, pickRandom);
 bot.onText(/\/start/, Start);
 bot.onText(/\/help/, Help);

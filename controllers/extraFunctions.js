@@ -21,7 +21,14 @@ const pickRandom = async (msg) => {
         `Randomly picked user: ${randomUser.username}`
       );
     } else {
-      bot.sendMessage(msg.chat.id, "only admins can  use this command.");
+      const sentMessage = await bot.sendMessage(
+        msg.chat.id,
+        "only admins can  use this command."
+      );
+
+      setTimeout(() => {
+        bot.deleteMessage(sentMessage.chat.id, sentMessage.message_id);
+      }, 10000);
     }
   } catch (error) {
     console.error("Error occurred:", error);
