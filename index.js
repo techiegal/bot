@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const port = process.env.port || 3000;
 const server = express();
+const url = process.env.SITE_URL;
 
 server.use(express.json());
 //database connection
@@ -23,6 +24,8 @@ const {
 
 const bot = getBotInstance();
 
+bot.setWebHook(`${url}/bot${process.env.BOT_TOKEN}`);
+
 server.get("/", (req, res) => {
   res.status(200).json({ message: "end point working fine bro" });
 });
@@ -30,6 +33,10 @@ server.get("/", (req, res) => {
 server.post(`/${process.env.BOT_TOKEN}`, (req, res) => {
   bot.processUpdate(req.body);
   res.status(200).json({ message: "ok" });
+});
+
+server.listen(port, () => {
+  console.log("app up and running ");
 });
 
 bot.on("message", handleMessage);
